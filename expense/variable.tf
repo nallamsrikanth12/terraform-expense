@@ -1,64 +1,55 @@
-
+# ec2 variables
 variable "instance_names" {
-    type = list(string)
-    default = [ "db" , "backend" , "frontend"]
+    type = list
+    default = ["db","backend","frontend"]
 }
 variable "image_id" {
-    type = string
-    default = "ami-090252cbe067a9e58"
+  type        = string #optional
+  default     = "ami-090252cbe067a9e58" #optional
+  description = "RHEL-9 AMI ID" #optional
 }
 
 variable "instance_type" {
-
-    type = string
     default = "t3.micro"
+    type = string
 }
 
-
 variable "common_tags" {
-    type = map(string)
     default = {
-        enviroment = "dev"
-        project = "expense"
-        date = "16-05-2024"
-        terraform = "true"
+        Project = "Expense"
+        Environment = "Dev"
+        Terraform = "true"
     }
 }
 
+#sg variables
+variable "sg_name" {
+    default = "allow_ssh"
+}
 
-variable "sg_group" {
-
-    type =  string
-    default = "allow_sg"
+variable "sg_description" {
+    default = "allowing port 22"
 }
 
 variable "ssh_port" {
-
-    type = number
     default = 22
 }
 
-variable "protocal" {
-
-    type = string
+variable "protocol" {
     default = "tcp"
 }
 
-
-variable "cidr_blocks" {
-
+variable "allowed_cidr" {
     type = list(string)
-
     default = ["0.0.0.0/0"]
 }
 
-variable "tags" {
-    type = map(string)
-    default = {
-        Name = "allow_sg"
-        created = "srikanth"
-        date = "16-05-2024"
-        terraform = "true"
-    }
 
+#r53 variables
+variable "zone_id" {
+    default = "Z09728512G1GJV5UP5N8L"
+}
+
+variable "domain_name" {
+    default = "srikantheswar.online"
 }
